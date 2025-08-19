@@ -34,8 +34,15 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    viAlias = true;
   };
 
-  # equivalent to calling starhip in .profile as seen in docs
-  programs.starship.enable = true;
+  programs.starship = {
+    # equivalent to calling starship in .profile as seen in docs
+    enable = true;
+  };
+
+  programs.tmux = {
+    enable = true;
+  };
 }
