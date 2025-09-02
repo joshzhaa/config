@@ -44,5 +44,27 @@
 
   programs.tmux = {
     enable = true;
+    shortcut = "Space";
+    baseIndex = 1;
+    keyMode = "vi";
+    escapeTime = 0;
+    plugins = with pkgs; [
+      tmuxPlugins.catppuccin
+    ];
+    extraConfig = ''
+      set -g mouse on
+      set -sa terminal-overrides ",xterm*:Tc"
+      set -g status-position top
+
+      bind-key h select-pane -L
+      bind-key j select-pane -D
+      bind-key k select-pane -U
+      bind-key l select-pane -R
+
+      bind-key -T copy-mode-vi 'v' send -X begin-selection
+      bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+    '';
+
   };
+
 }
