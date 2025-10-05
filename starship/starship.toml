@@ -14,7 +14,7 @@ $git_status\
 $time\
 [ ](fg:lavender)\
 $cmd_duration\
-$line_break\
+$line_break
 $character"""
 
 palette = 'catppuccin_mocha'
@@ -23,7 +23,7 @@ palette = 'catppuccin_mocha'
 show_always = true
 style_user = "bg:yellow fg:crust"
 style_root = "bg:yellow fg:crust"
-format = '[ $user]($style)'
+format = '[ $user ]($style)'
 
 [directory]
 style = "bg:blue fg:crust"
