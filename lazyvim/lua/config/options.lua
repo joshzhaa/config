@@ -11,6 +11,8 @@ vim.o.shiftwidth = 2 -- Number of spaces inserted when indenting
 
 vim.o.shell = "zsh"
 
+vim.g.root_spec = { "cwd" }
+
 vim.g.clipboard = {
   name = 'wsl-clip',
   copy = {

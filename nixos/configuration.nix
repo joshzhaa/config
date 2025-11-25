@@ -32,53 +32,57 @@
     fd
     tree-sitter
     starship
+    nil
+    statix
   ];
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-  };
 
   users.extraUsers.ssol = {
     shell = pkgs.zsh;
   };
 
-  programs.starship.enable = true;
+  programs = {
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+    };
 
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    enableLsColors = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
+    starship.enable = true;
+
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableLsColors = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
+
+    tmux = {
+      enable = true;
+      shortcut = "Space";
+      baseIndex = 1;
+      historyLimit = 100000;
+      keyMode = "vi";
+      escapeTime = 0;
+      plugins = with pkgs; [
+        tmuxPlugins.catppuccin
+      ];
+      # check $TERM
+      extraConfig = ''
+        set -g mouse on
+        set -g default-shell /run/current-system/sw/bin/zsh
+        set -g default-terminal "screen-256color"
+        set -sa terminal-overrides "xterm-256color:RGB"
+        set -g status-position top
+
+        bind-key h select-pane -L
+        bind-key j select-pane -D
+        bind-key k select-pane -U
+        bind-key l select-pane -R
+
+        bind-key -T copy-mode-vi 'v' send -X begin-selection
+        bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+      '';
+    };
   };
-
-  programs.tmux = {
-    enable = true;
-    shortcut = "Space";
-    baseIndex = 1;
-    historyLimit = 100000;
-    keyMode = "vi";
-    escapeTime = 0;
-    plugins = with pkgs; [
-      tmuxPlugins.catppuccin
-    ];
-    # check $TERM
-    extraConfig = ''
-      set -g mouse on
-      set -g default-terminal "screen-256color"
-      set -sa terminal-overrides "xterm-256color:RGB"
-      set -g status-position top
-
-      bind-key h select-pane -L
-      bind-key j select-pane -D
-      bind-key k select-pane -U
-      bind-key l select-pane -R
-
-      bind-key -T copy-mode-vi 'v' send -X begin-selection
-      bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
-    '';
-  };
-
 }
