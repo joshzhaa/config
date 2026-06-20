@@ -5,7 +5,7 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -32,7 +32,7 @@
     fd
     tree-sitter
     starship
-    nil
+    nixd
     statix
   ];
 
@@ -47,7 +47,10 @@
       viAlias = true;
     };
 
-    starship.enable = true;
+    starship = {
+      enable = true;
+      settings = builtins.fromTOML (builtins.readFile  ../starship/starship.toml);
+    };
 
     zsh = {
       enable = true;
@@ -56,6 +59,8 @@
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };
+
+    direnv.enable = true;
 
     tmux = {
       enable = true;
