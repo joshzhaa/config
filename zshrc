@@ -21,4 +21,4 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=white,dimmed'
 bindkey '^[0A' up-line-or-history
 bindkey '^[0A' down-line-or-history
 
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"

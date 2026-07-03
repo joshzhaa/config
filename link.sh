@@ -24,3 +24,4 @@ mkdir -p ~/.config
 symlink nvim ~/.config/nvim
 symlink alacritty ~/.config/alacritty
 symlink zshrc ~/.zshrc
+symlink starship.toml ~/.config/starship.toml

@@ -12,6 +12,7 @@
     ../nixos/tmux/module.nix
     ../nixos/zsh.nix
     ../nixos/direnv.nix
+    ../nixos/neovim.nix
   ];
 
   nix.settings.experimental-features = [
