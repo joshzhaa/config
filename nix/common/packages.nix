@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # nix
+    nil
     nixd
     statix
     nh
