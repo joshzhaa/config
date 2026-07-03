@@ -20,6 +20,7 @@
     "flakes"
   ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ (import ../overlays/kde.nix) ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
