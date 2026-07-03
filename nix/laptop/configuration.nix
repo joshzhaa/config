@@ -9,6 +9,9 @@
     ./hardware-configuration.nix
     ../common/locale.nix
     ../common/packages.nix
+    ../nixos/tmux/module.nix
+    ../nixos/zsh.nix
+    ../nixos/direnv.nix
   ];
 
   nix.settings.experimental-features = [
@@ -53,6 +56,8 @@
       kdePackages.kate
     ];
   };
+
+  fonts.packages = [ pkgs.nerd-fonts.hack ];
 
   programs.firefox.enable = true;
 
