@@ -1,0 +1,24 @@
+# The following lines were added by compinstall
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=100000
+SAVEHIST=100000
+setopt nomatch
+unsetopt autocd beep extendedglob notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+setopt interactivecomments
+bindkey '^I' complete-word # tab -> complete
+bindkey '^[[Z' autosuggest-accept # shift + tab -> autosuggest
+
+# comments being balck on black is a horrific default
+ZSH_HIGHLIGHT_STYLES[comment]='fg=white,dimmed'
+
+bindkey '^[0A' up-line-or-history
+bindkey '^[0A' down-line-or-history
+
+eval "$(starship init zsh)"

@@ -2,9 +2,10 @@
 import = ["./thelovelace.toml"]
 
 [window]
-dimensions = { columns = 400, lines = 100 }
-opacity = 0.8
+padding.x = 5
+padding.y = 5
+opacity = 0.9
 
 [font]
-size = 14.0
+size = 12.5
 normal = { family = "Hack Nerd Font Mono" }
