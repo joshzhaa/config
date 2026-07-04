@@ -2,4 +2,4 @@
 require("config.lazy")
 
 -- enabling LSPs not handled inside LazyVim
-vim.lsp.enable('nixd')
+vim.lsp.enable("nixd")
