@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# From the blog post (CC-0): https://jade.fyi/blog/use-nix-less/
+# From the blog post : https://jade.fyi/blog/use-nix-less/ (CC-0)
 # This script is definitely better than what I wrote for use on my work laptop.
 
 scriptdir=$(cd "$(dirname -- "$0")" ; pwd -P)
 
 function symlink() {
-    if [[ -e "$2" && ! -L "$2" ]] ; then 
+    if [[ -e "$2" && ! -L "$2" ]] ; then
         echo "$2 exists and is not a symlink. Ignoring it." >&2
         return 1
     fi

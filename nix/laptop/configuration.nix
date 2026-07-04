@@ -3,12 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
-
 {
   imports = [
-    ./hardware-configuration.nix
     ../common/locale.nix
     ../common/packages.nix
+    ../common/gui-packages.nix
     ../nixos/tmux/module.nix
     ../nixos/zsh.nix
     ../nixos/direnv.nix
@@ -65,7 +64,5 @@
 
   fonts.packages = [ pkgs.nerd-fonts.hack ];
 
-  programs.chromium.enable = true;
-
-  system.stateVersion = "26.05"; # Did you read the comment?
+  system.stateVersion = "26.05";
 }

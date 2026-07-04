@@ -12,10 +12,6 @@
     ripgrep
     fd
     starship
-    # gui
-    obsidian
-    alacritty
-    chromium
     # tui
     neovim
     tree-sitter
