@@ -11,6 +11,13 @@
   wsl.enable = true;
   wsl.defaultUser = "ssol";
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  networking.hostName = "wsl";
+
   users.extraUsers.ssol = {
     shell = pkgs.zsh;
   };

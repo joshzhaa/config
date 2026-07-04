@@ -13,7 +13,8 @@
     { nixpkgs, nixos-wsl, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      overlay = import ./overlays/kde.nix;
+      pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
     in
     {
       nixosConfigurations = {
@@ -34,6 +35,10 @@
           ];
         };
       };
+
+      # for building on a more powerful machine then `nix copy`ing it.
+      # this one typically gets OOMed, so remember --max-jobs.
+      packages.${system}.default = pkgs.kdePackages.plasma-workspace;
 
       formatter.${system} = pkgs.nixfmt-tree;
     };
