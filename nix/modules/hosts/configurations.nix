@@ -6,6 +6,7 @@ in
   flake.nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.host-laptop
+      self.nixosModules.host-laptop-hardware
     ];
   };
 

@@ -1,6 +1,6 @@
 { self, ... }: {
   flake.nixosModules.host-wsl =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       imports = [
         self.nixosModules.headless-packages
@@ -18,6 +18,7 @@
         "nix-command"
         "flakes"
       ];
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
       networking.hostName = "wsl";
 
