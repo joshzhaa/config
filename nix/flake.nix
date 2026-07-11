@@ -33,7 +33,8 @@
       perSystem = { pkgs, system, ... }: {
         # for building on a more powerful machine, then `nix copy`ing it.
         # this one often gets OOMed, so remember --max-jobs.
-        packages.default = pkgs.kdePackages.plasma-workspace;
+        packages.plasma-final = pkgs.kdePackages.plasma-workspace;
+        packages.plasma-prev = nixpkgs.legacyPackages.${system}.kdePackages.plasma-workspace;
 
         formatter = pkgs.nixfmt-tree;
 
