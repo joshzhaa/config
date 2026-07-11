@@ -2,6 +2,7 @@
   description = "nixos configurations";
 
   inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
@@ -10,36 +11,31 @@
   };
 
   outputs =
-    { nixpkgs, nixos-wsl, ... }:
+    inputs:
     let
-      system = "x86_64-linux";
-      overlay = import ./overlays/kde.nix;
-      pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
+      inherit (inputs) flake-parts;
+      mkFlake = flake-parts.lib.mkFlake { inherit inputs; };
     in
-    {
-      nixosConfigurations = {
-        laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./laptop/hardware-configuration.nix
-            ./laptop/configuration.nix
-          ];
-        };
+    mkFlake {
+      imports = [
+        modules/hosts/configurations.nix
+        modules/hosts/laptop/configuration.nix
+        modules/hosts/laptop/hardware-configuration.nix
+        modules/hosts/laptop/sound.nix
+        modules/hosts/wsl/configuration.nix
+        modules/nixos-modules/locale.nix
+        modules/nixos-modules/packages.nix
+        modules/nixos-modules/terminal.nix
+        modules/overlays/overlays.nix
+      ];
+      systems = [ "x86-linux" ];
 
-        wsl = nixpkgs.lib.nixosSystem {
-          inherit system;
+      perSystem = { pkgs, ... }: {
+        # for building on a more powerful machine, then `nix copy`ing it.
+        # this one often gets OOMed, so remember --max-jobs.
+        packages.default = pkgs.kdePackages.plasma-workspace;
 
-          modules = [
-            nixos-wsl.nixosModules.default
-            ./wsl/configuration.nix
-          ];
-        };
+        formatter = pkgs.nixfmt-tree;
       };
-
-      # for building on a more powerful machine then `nix copy`ing it.
-      # this one typically gets OOMed, so remember --max-jobs.
-      packages.${system}.default = pkgs.kdePackages.plasma-workspace;
-
-      formatter.${system} = pkgs.nixfmt-tree;
     };
 }
