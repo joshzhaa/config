@@ -13,7 +13,7 @@
   outputs =
     inputs:
     let
-      inherit (inputs) flake-parts;
+      inherit (inputs) self flake-parts nixpkgs;
       mkFlake = flake-parts.lib.mkFlake { inherit inputs; };
     in
     mkFlake {
@@ -28,14 +28,20 @@
         modules/nixos-modules/terminal.nix
         modules/overlays/overlays.nix
       ];
-      systems = [ "x86-linux" ];
+      systems = [ "x86_64-linux" ];
 
-      perSystem = { pkgs, ... }: {
+      perSystem = { pkgs, system, ... }: {
         # for building on a more powerful machine, then `nix copy`ing it.
         # this one often gets OOMed, so remember --max-jobs.
         packages.default = pkgs.kdePackages.plasma-workspace;
 
         formatter = pkgs.nixfmt-tree;
+
+        _module.args.pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ self.overlays.kde ];
+          config.allowUnfree = true;
+        };
       };
     };
 }
