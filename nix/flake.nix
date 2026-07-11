@@ -18,15 +18,15 @@
     in
     mkFlake {
       imports = [
-        modules/hosts/configurations.nix
-        modules/hosts/laptop/configuration.nix
-        modules/hosts/laptop/hardware-configuration.nix
-        modules/hosts/laptop/sound.nix
-        modules/hosts/wsl/configuration.nix
-        modules/nixos-modules/locale.nix
-        modules/nixos-modules/packages.nix
-        modules/nixos-modules/terminal.nix
-        modules/overlays/overlays.nix
+        ./modules/hosts/configurations.nix
+        ./modules/hosts/laptop/configuration.nix
+        ./modules/hosts/laptop/hardware-configuration.nix
+        ./modules/hosts/laptop/sound.nix
+        ./modules/hosts/wsl/configuration.nix
+        ./modules/nixos-modules/locale.nix
+        ./modules/nixos-modules/packages.nix
+        ./modules/nixos-modules/terminal.nix
+        ./modules/overlays/module.nix
       ];
       systems = [ "x86_64-linux" ];
 
