@@ -22,3 +22,4 @@ bindkey '^[0A' up-line-or-history
 bindkey '^[0A' down-line-or-history
 
 eval "$(starship init zsh)"
+export NH_FLAKE="$HOME/config/nix"
