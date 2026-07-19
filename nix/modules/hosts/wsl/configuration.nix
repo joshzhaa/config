@@ -1,11 +1,11 @@
-{ self, ... }: {
+{ config, ... }: {
   flake.nixosModules.host-wsl =
     { pkgs, lib, ... }:
     {
       imports = [
-        self.nixosModules.headless-packages
-        self.nixosModules.terminal-nixos
-        self.nixosModules.locale
+        config.flake.nixosModules.headless-packages
+        config.flake.nixosModules.terminal-nixos
+        config.flake.nixosModules.locale
       ];
 
       wsl.enable = true;

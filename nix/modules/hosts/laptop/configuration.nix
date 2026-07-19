@@ -1,13 +1,13 @@
-{ self, ... }: {
+{ config, ... }: {
   flake.nixosModules.host-laptop =
     { pkgs, ... }:
     {
       imports = [
-        self.nixosModules.headless-packages
-        self.nixosModules.desktop-packages
-        self.nixosModules.terminal-nixos
-        self.nixosModules.locale
-        self.nixosModules.sound
+        config.flake.nixosModules.headless-packages
+        config.flake.nixosModules.desktop-packages
+        config.flake.nixosModules.terminal-nixos
+        config.flake.nixosModules.locale
+        config.flake.nixosModules.sound
       ];
 
       nix.settings.experimental-features = [
@@ -15,7 +15,7 @@
         "flakes"
       ];
       nixpkgs.config.allowUnfree = true;
-      nixpkgs.overlays = [ self.overlays.kde ];
+      nixpkgs.overlays = [ config.flake.overlays.kde ];
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
