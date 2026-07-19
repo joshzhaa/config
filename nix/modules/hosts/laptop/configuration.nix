@@ -51,6 +51,8 @@
         shell = pkgs.zsh;
       };
 
+      programs.chromium.enable = true;
+
       fonts.packages = [ pkgs.nerd-fonts.hack ];
 
       system.stateVersion = "26.05";

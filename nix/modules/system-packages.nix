@@ -18,10 +18,6 @@ _: {
         tree-sitter
       ];
 
-      environment.variables = {
-        NH_FLAKE = "$HOME/config/nix";
-      };
-
     };
 
     desktop-packages = { pkgs, ... }: {
@@ -31,8 +27,6 @@ _: {
         alacritty
         chromium
       ];
-
-      programs.chromium.enable = true;
 
     };
   };
