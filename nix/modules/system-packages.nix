@@ -13,6 +13,7 @@ _: {
         ripgrep
         fd
         starship
+        jujutsu
         # tui
         neovim
         tree-sitter

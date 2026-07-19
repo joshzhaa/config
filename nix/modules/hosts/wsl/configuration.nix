@@ -4,11 +4,8 @@
     {
       imports = [
         self.nixosModules.headless-packages
+        self.nixosModules.terminal-nixos
         self.nixosModules.locale
-        self.nixosModules.zsh
-        self.nixosModules.direnv
-        self.nixosModules.neovim
-        self.nixosModules.tmux
       ];
 
       wsl.enable = true;

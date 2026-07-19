@@ -5,11 +5,8 @@
       imports = [
         self.nixosModules.headless-packages
         self.nixosModules.desktop-packages
+        self.nixosModules.terminal-nixos
         self.nixosModules.locale
-        self.nixosModules.zsh
-        self.nixosModules.direnv
-        self.nixosModules.neovim
-        self.nixosModules.tmux
         self.nixosModules.sound
       ];
 
