@@ -8,35 +8,35 @@
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs:
     let
-      inherit (inputs) self flake-parts nixpkgs;
-      mkFlake = flake-parts.lib.mkFlake { inherit inputs; };
+      inherit (inputs)
+        self
+        flake-parts
+        nixpkgs
+        treefmt-nix
+        ;
+      importTree = import ./lib/import-tree.nix nixpkgs;
     in
-    mkFlake {
-      imports = [
-        ./modules/hosts/configurations.nix
-        ./modules/hosts/laptop/configuration.nix
-        ./modules/hosts/laptop/hardware-configuration.nix
-        ./modules/hosts/laptop/sound.nix
-        ./modules/hosts/wsl/configuration.nix
-        ./modules/nixos-modules/locale.nix
-        ./modules/nixos-modules/packages.nix
-        ./modules/nixos-modules/terminal.nix
-        ./modules/overlays/module.nix
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = importTree ./modules ++ [ treefmt-nix.flakeModule ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
       ];
-      systems = [ "x86_64-linux" ];
 
       perSystem = { pkgs, system, ... }: {
         # for building on a more powerful machine, then `nix copy`ing it.
         # this one often gets OOMed, so remember --max-jobs.
         packages.plasma-final = pkgs.kdePackages.plasma-workspace;
         packages.plasma-prev = nixpkgs.legacyPackages.${system}.kdePackages.plasma-workspace;
-
-        formatter = pkgs.nixfmt-tree;
 
         _module.args.pkgs = import nixpkgs {
           inherit system;

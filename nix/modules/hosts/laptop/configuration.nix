@@ -3,7 +3,6 @@
     { pkgs, ... }:
     {
       imports = [
-        self.nixosModules.host-laptop-hardware
         self.nixosModules.headless-packages
         self.nixosModules.desktop-packages
         self.nixosModules.locale

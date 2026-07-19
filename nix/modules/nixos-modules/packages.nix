@@ -4,7 +4,6 @@ _: {
 
       environment.systemPackages = with pkgs; [
         # nix
-        nil
         nixd
         statix
         nixfmt
@@ -18,6 +17,10 @@ _: {
         neovim
         tree-sitter
       ];
+
+      environment.variables = {
+        NH_FLAKE = "$HOME/config/nix";
+      };
 
     };
 
