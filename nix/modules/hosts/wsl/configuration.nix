@@ -1,4 +1,12 @@
-{ config, ... }: {
+{ config, inputs, ... }: {
+
+  flake.nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      inputs.nixos-wsl.nixosModules.default
+      config.flake.nixosModules.host-wsl
+    ];
+  };
+
   flake.nixosModules.host-wsl =
     { pkgs, lib, ... }:
     {

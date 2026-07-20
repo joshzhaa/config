@@ -1,4 +1,12 @@
-{ config, ... }: {
+{ config, inputs, ... }: {
+
+  flake.nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      config.flake.nixosModules.host-laptop
+      config.flake.nixosModules.host-laptop-hardware
+    ];
+  };
+
   flake.nixosModules.host-laptop =
     { pkgs, ... }:
     {

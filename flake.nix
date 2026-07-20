@@ -22,10 +22,10 @@
         nixpkgs
         treefmt-nix
         ;
-      importTree = import ./lib/import-tree.nix nixpkgs;
+      importTree = import ./nix/lib/import-tree.nix nixpkgs;
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = importTree ./modules ++ [ treefmt-nix.flakeModule ];
+      imports = importTree ./nix/modules ++ [ treefmt-nix.flakeModule ];
       systems = [
         "x86_64-linux"
         "aarch64-darwin"

@@ -317,7 +317,7 @@ jj log --revisions @ --no-graph --ignore-working-copy --color never --limit 1 --
     ),
     if(empty, "(empty)"),
     coalesce(
-      truncate_end(20, description.first_line(), "…"),
+      truncate_end(25, description.first_line(), "…"),
       "(no description set)",
     ),
   )
