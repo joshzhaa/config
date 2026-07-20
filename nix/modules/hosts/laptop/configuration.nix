@@ -10,19 +10,15 @@
   flake.nixosModules.host-laptop =
     { pkgs, ... }:
     {
-      imports = [
-        config.flake.nixosModules.headless-packages
-        config.flake.nixosModules.desktop-packages
-        config.flake.nixosModules.terminal-nixos
-        config.flake.nixosModules.locale
-        config.flake.nixosModules.sound
+      imports = with config.flake.nixosModules; [
+        headless-packages
+        desktop-packages
+        terminal-nixos
+        locale
+        sound
+        nix
       ];
 
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      nixpkgs.config.allowUnfree = true;
       nixpkgs.overlays = [ config.flake.overlays.kde ];
 
       boot.loader.systemd-boot.enable = true;

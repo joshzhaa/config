@@ -8,22 +8,20 @@
   };
 
   flake.nixosModules.host-wsl =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
-      imports = [
-        config.flake.nixosModules.headless-packages
-        config.flake.nixosModules.terminal-nixos
-        config.flake.nixosModules.locale
+      imports = with config.flake.nixosModules; [
+        headless-packages
+        terminal-nixos
+        locale
+        nix
       ];
 
       wsl.enable = true;
       wsl.defaultUser = "ssol";
 
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+      # TODO: determine if this line actually does something
+      # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
       networking.hostName = "wsl";
 
