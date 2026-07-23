@@ -32,7 +32,7 @@
 
       services = {
         # Enable the KDE Plasma Desktop Environment.
-        displayManager.sddm.enable = true;
+        displayManager.plasma-login-manager.enable = true;
         desktopManager.plasma6.enable = true;
 
         system76-scheduler.enable = true;
